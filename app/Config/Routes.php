@@ -59,13 +59,13 @@ $routes->group('admin', static function ($routes) {
         $routes->post('update/(:alphanum)', [[KaryawanController::class, 'update'], '$1']);
         $routes->get('delete/(:alphanum)', [[KaryawanController::class, 'destroy'], '$1']);
     });
-    
+
     $routes->group('kepala_sekolah', static function ($routes) {
         $routes->get('/', [KepalaSekolahController::class, 'index']);
         $routes->get('edit', [KepalaSekolahController::class, 'edit']);
         $routes->post('update', [KepalaSekolahController::class, 'update']);
     });
-    
+
     $routes->group('gaji', static function ($routes) {
         $routes->get('/', [GajiController::class, 'index']);
         $routes->post('get-gaji-json', [GajiController::class, 'getGajiJSON']);
@@ -79,6 +79,7 @@ $routes->group('admin', static function ($routes) {
     $routes->group('laporan', static function ($routes) {
         $routes->get('/', [LaporanController::class, 'index']);
         $routes->post('cetak', [LaporanController::class, 'cetak']);
+        $routes->post('get-laporan-json', [LaporanController::class, 'getLaporanJSON']);
     });
 });
 
@@ -94,7 +95,7 @@ $routes->group('kepsek', static function ($routes) {
 $routes->group('karyawan', static function ($routes) {
     $routes->get('dashboard', [KaryawanDashboardController::class, 'index']);
 
-    $routes->group('gaji', static function ($routes){
+    $routes->group('gaji', static function ($routes) {
         $routes->get('/', [KaryawanGajiController::class, 'index']);
         $routes->post('get-gaji-json', [KaryawanGajiController::class, 'getGajiJSON']);
         $routes->get('cetak-slip/(:alphanum)', [[KaryawanGajiController::class, 'cetak_slip'], '$1']);

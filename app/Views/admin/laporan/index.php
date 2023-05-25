@@ -17,8 +17,8 @@
         </div>
     </div>
 </div>
-<div class="card-box">
-    <div class="row">
+<div class="card-box table-responsive">
+    <div class="row m-b-10">
         <div class="col-sm-6" bis_skin_checked="1">
             <form class="form-inline" id="formGajiFilter" action="<?= site_url('admin/laporan/cetak') ?>" method="POST">
                 <div class="form-group m-r-10">
@@ -58,11 +58,84 @@
             </form>
         </div>
     </div>
+
+    <table id="datatable" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Tanggal Gajian</th>
+                <th>Nama Karyawan</th>
+                <th>Gaji</th>
+                <th>Uang Makan</th>
+                <th>Potongan</th>
+            </tr>
+        </thead>
+    </table>
 </div>
+
 <?= $this->endSection() ?>
+
 
 <?= $this->section('script') ?>
 <script>
-    $(document).ready(function() {})
+    var table;
+
+    $(document).ready(function() {
+        table = $('#datatable').DataTable({
+            "aLengthMenu": [
+                [10, 30, 50, 100],
+                [10, 30, 50, 100]
+            ],
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: '<?= site_url('/admin/laporan/get-laporan-json') ?>',
+                type: 'POST',
+                data: function(data) {
+                    data.bulan = $('#filter-bulan').val();
+                    data.tahun = $('#filter-tahun').val();
+                }
+            },
+            columns: [{
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'tanggal_gajian',
+                    name: 'tanggal_gajian'
+                },
+                {
+                    data: 'nama',
+                    name: 'nama'
+                },
+                {
+                    data: 'gaji_pokok',
+                    name: 'gaji_pokok'
+                },
+                {
+                    data: 'uang_makan',
+                    name: 'uang_makan'
+                },
+                {
+                    data: 'potongan',
+                    name: 'potongan'
+                },
+            ],
+        });
+
+        // Fungsi untuk menangani perubahan pada filter bulan dan tahun
+        $('#filter-bulan, #filter-tahun').on('change', function() {
+            table.ajax.reload(); // Muat ulang data tabel saat filter berubah
+        });
+
+        table.on('draw.dt', function() {
+            var Page = $('#datatable').DataTable().page.info();
+            table.column(0, {
+                page: 'current'
+            }).nodes().each(function(cell, i) {
+                cell.innerHTML = i + 1 + Page.start;
+            });
+        });
+    });
 </script>
 <?= $this->endSection() ?>

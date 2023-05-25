@@ -33,6 +33,31 @@ class LaporanController extends BaseController
         return view('admin/laporan/index');
     }
 
+    public function getLaporanJSON()
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('gaji');
+        $builder->select('gaji.*, karyawans.nama');
+        $builder->join('karyawans', 'karyawans.id = gaji.karyawan_id');
+        $builder->orderBy('tanggal_gajian', 'DESC');
+
+        if ($this->request->getVar('bulan')) {
+            $builder->where('MONTH(tanggal_gajian)', $this->request->getVar('bulan'));
+        }
+        if ($this->request->getVar('tahun')) {
+            $builder->where('YEAR(tanggal_gajian)', $this->request->getVar('tahun'));
+        }
+        $query = $builder->get();
+
+        $data = $query->getResultArray();
+
+        $output = array(
+            "data" => $data
+        );
+
+        return $this->response->setJSON($output);
+    }
+
     public function cetak()
     {
         helper('my_helper');
