@@ -67,6 +67,7 @@
                 <th>Nama Karyawan</th>
                 <th>Gaji</th>
                 <th>Uang Makan</th>
+                <th>Uang Tambahan</th>
                 <th>Potongan</th>
             </tr>
         </thead>
@@ -115,6 +116,10 @@
                 {
                     data: 'uang_makan',
                     name: 'uang_makan'
+                },
+                {
+                    data: 'uang_tambahan',
+                    name: 'uang_tambahan'
                 },
                 {
                     data: 'potongan',

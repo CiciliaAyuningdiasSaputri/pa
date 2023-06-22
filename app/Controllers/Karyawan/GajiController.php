@@ -70,12 +70,21 @@ class GajiController extends BaseController
                 $nestedData['no'] = '';
                 $nestedData['nama'] = $g->nama;
                 $nestedData['tanggal'] = $g->tanggal_gajian;
-                $gaji = number_format($g->gaji, 2, '.', ',');
-                $nestedData['gaji'] = $gaji;
+                $gaji = number_format($g->gaji_pokok, 2, '.', ',');
+                $nestedData['gaji_pokok'] = $gaji;
+                $uang_makan = number_format($g->uang_makan, 2, '.', ',');
+                $nestedData['uang_makan'] = $uang_makan;
+                $uang_tambahan = number_format($g->uang_tambahan, 2, '.', ',');
+                $nestedData['uang_tambahan'] = $uang_tambahan;
+                $potongan = number_format($g->potongan, 2, '.', ',');
+                $nestedData['potongan'] = $potongan;
+                $jumlah = $g->gaji_pokok + $g->uang_makan + $g->uang_tambahan - $g->potongan;
+                $jumlah_gaji = number_format($jumlah, 2, '.', ',');
+                $nestedData['jumlah'] = $jumlah_gaji;
                 $nestedData['action'] = '
                     <a href="' . site_url('karyawan/gaji/cetak-slip/' . $g->id) . '" class="btn btn-icon waves-effect waves-light btn-primary m-b-5" target="_blank"><i class="fa fa-print"></i></a>
                 ';
-                $data[] = $nestedData; 
+                $data[] = $nestedData;
             }
         }
 

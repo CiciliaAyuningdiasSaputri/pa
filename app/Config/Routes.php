@@ -89,6 +89,7 @@ $routes->group('kepsek', static function ($routes) {
     $routes->group('laporan', static function ($routes) {
         $routes->get('/', [KepsekLaporanController::class, 'index']);
         $routes->post('cetak', [KepsekLaporanController::class, 'cetak']);
+        $routes->post('get-laporan-json', [LaporanController::class, 'getLaporanJSON']);
     });
 });
 
