@@ -36,6 +36,7 @@
     </style>
 </head>
 
+
 <body>
     <div style="text-align:center">
         <h3>SLIP GAJI</h3>
@@ -52,16 +53,16 @@
         <tbody>
             <tr>
                 <td scope="row"></td>
-                <td>GAJI</td>
-                <td></td>
-                <td></td>
+                <td>Tanggal</td>
+                <td>Gaji Pokok</td>
                 <td>Uang Makan</td>
+                <td>Uang Tambahan</td>
                 <td>Potongan Gaji</td>
                 <td>Jumlah</td>
-                <td>tangal</td>
             </tr>
         </tbody>
     </table>
+    
 </body>
 
 </html>

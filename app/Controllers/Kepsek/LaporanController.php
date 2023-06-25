@@ -33,6 +33,31 @@ class LaporanController extends BaseController
         return view('kepsek/laporan/index');
     }
 
+    public function getLaporanJSON()
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('gaji');
+        $builder->select('gaji.*, karyawans.nama');
+        $builder->join('karyawans', 'karyawans.id = gaji.karyawan_id');
+        $builder->orderBy('tanggal_gajian', 'DESC');
+
+        if ($this->request->getVar('bulan')) {
+            $builder->where('MONTH(tanggal_gajian)', $this->request->getVar('bulan'));
+        }
+        if ($this->request->getVar('tahun')) {
+            $builder->where('YEAR(tanggal_gajian)', $this->request->getVar('tahun'));
+        }
+        $query = $builder->get();
+
+        $data = $query->getResultArray();
+
+        $output = array(
+            "data" => $data
+        );
+
+        return $this->response->setJSON($output);
+    }
+
     public function cetak()
     {
         helper('my_helper');
@@ -66,7 +91,8 @@ class LaporanController extends BaseController
         $sheet->setCellValue('C3', 'NAMA KARYAWAN');
         $sheet->setCellValue('D3', 'GAJI');
         $sheet->setCellValue('E3', 'UANG MAKAN');
-        $sheet->setCellValue('F3', 'POTONGAN');
+        $sheet->setCellValue('F3', 'UANG TAMBAHAN');
+        $sheet->setCellValue('G3', 'POTONGAN');
 
         $sheet->getColumnDimension('A')->setWidth(8); // Set width kolom A
         $sheet->getColumnDimension('B')->setWidth(20); // Set width kolom B
@@ -74,9 +100,10 @@ class LaporanController extends BaseController
         $sheet->getColumnDimension('D')->setWidth(20); // Set width kolom D
         $sheet->getColumnDimension('E')->setWidth(20); // Set width kolom E
         $sheet->getColumnDimension('F')->setWidth(20); // Set width kolom F
+        $sheet->getColumnDimension('G')->setWidth(20); // Set width kolom G
 
-        $sheet->getStyle('A3:D3')->getFont()->setBold(true);
-        $sheet->getStyle('A3:D3')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A3:G3')->getFont()->setBold(true);
+        $sheet->getStyle('A3:G3')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
         $sheet->getRowDimension(3)->setRowHeight(25);
         $sheet->getStyle('A')->getAlignment()->setHorizontal('center');
 
@@ -107,7 +134,8 @@ class LaporanController extends BaseController
             $sheet->setCellValue('c' . $rowNum, $d['nama']);
             $sheet->setCellValue('d' . $rowNum, $d['gaji_pokok']);
             $sheet->setCellValue('e' . $rowNum, $d['uang_makan']);
-            $sheet->setCellValue('f' . $rowNum, $d['potongan']);
+            $sheet->setCellValue('f' . $rowNum, $d['uang_tambahan']);
+            $sheet->setCellValue('g' . $rowNum, $d['potongan']);
 
             $sheet->getStyle('d' . $rowNum)->getNumberFormat()->setFormatCode('#,##0.00');
             $sheet->getRowDimension($rowNum)->setRowHeight(20);
@@ -115,8 +143,8 @@ class LaporanController extends BaseController
             $rowNum++;
         }
 
-        $sheet->getStyle('A3:F' . ($rowNum - 1))->applyFromArray($allBorder);
-        $sheet->getStyle('A3:F' . ($rowNum - 1))->getAlignment()->setVertical('center');
+        $sheet->getStyle('A3:G' . ($rowNum - 1))->applyFromArray($allBorder);
+        $sheet->getStyle('A3:G' . ($rowNum - 1))->getAlignment()->setVertical('center');
 
         // print_r($_POST);
         // die();

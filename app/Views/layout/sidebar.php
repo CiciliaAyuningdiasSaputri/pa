@@ -35,7 +35,7 @@
                         <li>
                             <a href="<?= site_url(session()->get('role') . '/laporan') ?>" class="waves-effect">
                                 <i class="fa fa-print"></i>
-                                Laporan
+                                Laporan 
                         </a>
                     </li>
                 <?php } ?>

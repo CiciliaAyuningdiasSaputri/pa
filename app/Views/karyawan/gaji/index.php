@@ -56,14 +56,16 @@
                 <button type="button" id="btn-reset" class="btn btn-success waves-effect waves-light btn-md">
                     Reset
                 </button>
+                <!-- <div class="d-flex flex-row-reverse bd-highlight">
+                    <a href="<?php echo base_url('PdfController/htmlToPDF') ?>" class="btn btn-primary">
+                    Download PDF
+                    </a> -->
+    </div>
             </form>
         </div>
     </div>
 </div>
 <div class="card-box table-responsive" id="gajiView">
-    <div class="m-b-20">
-        <a href="<?= site_url('karyawan/gaji/input-gaji') ?>" class="btn btn-info"><i class="fa fa-pencil"></i> Input Gaji</a>
-    </div>
     <table id="datatable" class="table table-striped table-bordered">
         <thead>
             <tr>
