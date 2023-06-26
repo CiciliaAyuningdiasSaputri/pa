@@ -53,16 +53,22 @@
                     <div class="col-md-10">
                         <div class="input-group m-t-10" bis_skin_checked="1">
                             <span class="input-group-addon">Rp</span>
-                            <input type="text" placeholder=""  class="form-control autonumber" name="gaji_pokok">
+                            <select class="form-control" name="gaji_pokok">
+                                <option value="1000000">1.000.000</option>
+                                <option value="2000000">2.000.000</option>
+                                <option value="3000000">3.000.000</option>
+                                <!-- Tambahkan value-value lain sesuai kebutuhan -->
+                            </select>
                         </div>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="col-md-2 control-label">Uang Makan</label>
                     <div class="col-md-10">
                         <div class="input-group m-t-10" bis_skin_checked="1">
                             <span class="input-group-addon">Rp</span>
-                            <input type="text" placeholder=""  class="form-control autonumber" name="uang_makan">
+                            <input type="text" placeholder="" class="form-control autonumber" name="uang_makan" value="50000">
                         </div>
                     </div>
                 </div>
@@ -71,7 +77,7 @@
                     <div class="col-md-10">
                         <div class="input-group m-t-10" bis_skin_checked="1">
                             <span class="input-group-addon">Rp</span>
-                            <input type="text" placeholder=""  class="form-control autonumber" name="uang_tambahan">
+                            <input type="text" placeholder="" class="form-control autonumber" name="uang_tambahan">
                         </div>
                     </div>
                 </div>
@@ -80,7 +86,7 @@
                     <div class="col-md-10">
                         <div class="input-group m-t-10" bis_skin_checked="1">
                             <span class="input-group-addon">Rp</span>
-                            <input type="text" placeholder=""  class="form-control autonumber" name="potongan">
+                            <input type="text" placeholder="" class="form-control autonumber" name="potongan">
                         </div>
                     </div>
                 </div>
@@ -88,13 +94,19 @@
                     <label class="col-md-2 control-label">Tanggal Gajian</label>
                     <div class="col-md-10">
                         <div class="input-group">
-                            <?php 
-                                $date = date('Y-m-d');
+                            <?php
+                            $date = date('Y-m-d');
                             ?>
                             <!-- <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker-autoclose"> -->
                             <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" name="tanggal_gajian" value="<?= $date ?>">
                             <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar text-white"></i></span>
                         </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Jumlah Absen</label>
+                    <div class="col-md-10">
+                        <input type="text" placeholder="" class="form-control autonumber" name="absen">
                     </div>
                 </div>
                 <div class="form-group">
