@@ -39,6 +39,11 @@
 
 <body>
     <div style="text-align:center">
+        <p> PEMERINTAH KABUPATEN LAMONGAN</p>
+        <p>DINAS PENIDIDKAN</p>
+        <p>SEKOLAH DASAR NEGERI SIDOREJO</p>
+        <p>JL. Kadet Soewoko No. 107 A Sidorejo</p>
+        <p>Kecamatan Deket       Kode Pos : 62291</p>
         <h3>SLIP GAJI</h3>
         <p>SD NEGERI SIDOREJO</p>
     </div>

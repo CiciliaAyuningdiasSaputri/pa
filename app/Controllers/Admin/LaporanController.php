@@ -93,6 +93,7 @@ class LaporanController extends BaseController
         $sheet->setCellValue('E3', 'UANG MAKAN');
         $sheet->setCellValue('F3', 'UANG TAMBAHAN');
         $sheet->setCellValue('G3', 'POTONGAN');
+        $sheet->setCellValue('H3', 'JUMLAH');
 
         $sheet->getColumnDimension('A')->setWidth(8); // Set width kolom A
         $sheet->getColumnDimension('B')->setWidth(20); // Set width kolom B
@@ -101,9 +102,10 @@ class LaporanController extends BaseController
         $sheet->getColumnDimension('E')->setWidth(20); // Set width kolom E
         $sheet->getColumnDimension('F')->setWidth(20); // Set width kolom F
         $sheet->getColumnDimension('G')->setWidth(20); // Set width kolom G
+        $sheet->getColumnDimension('H')->setWidth(20); // Set width kolom H
 
-        $sheet->getStyle('A3:G3')->getFont()->setBold(true);
-        $sheet->getStyle('A3:G3')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A3:H3')->getFont()->setBold(true);
+        $sheet->getStyle('A3:H3')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
         $sheet->getRowDimension(3)->setRowHeight(25);
         $sheet->getStyle('A')->getAlignment()->setHorizontal('center');
 
@@ -136,6 +138,7 @@ class LaporanController extends BaseController
             $sheet->setCellValue('e' . $rowNum, $d['uang_makan']);
             $sheet->setCellValue('f' . $rowNum, $d['uang_tambahan']);
             $sheet->setCellValue('g' . $rowNum, $d['potongan']);
+            $sheet->setCellValue('h' . $rowNum, $d['jumlah']);
 
             $sheet->getStyle('d' . $rowNum)->getNumberFormat()->setFormatCode('#,##0.00');
             $sheet->getRowDimension($rowNum)->setRowHeight(20);
@@ -143,8 +146,8 @@ class LaporanController extends BaseController
             $rowNum++;
         }
 
-        $sheet->getStyle('A3:G' . ($rowNum - 1))->applyFromArray($allBorder);
-        $sheet->getStyle('A3:G' . ($rowNum - 1))->getAlignment()->setVertical('center');
+        $sheet->getStyle('A3:H' . ($rowNum - 1))->applyFromArray($allBorder);
+        $sheet->getStyle('A3:H' . ($rowNum - 1))->getAlignment()->setVertical('center');
 
         // print_r($_POST);
         // die();
