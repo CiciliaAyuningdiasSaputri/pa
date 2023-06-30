@@ -103,12 +103,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="col-md-2 control-label">Jumlah Absen</label>
                     <div class="col-md-10">
                         <input type="text" placeholder="" class="form-control autonumber" name="absen">
                     </div>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <div class="col-sm-10 col-sm-offset-2">
                         <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
