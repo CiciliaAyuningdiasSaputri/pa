@@ -69,6 +69,7 @@
                 <th>Uang Makan</th>
                 <th>Uang Tambahan</th>
                 <th>Potongan</th>
+                <th>Jumlah</th>
             </tr>
         </thead>
     </table>
@@ -124,6 +125,9 @@
                 {
                     data: 'potongan',
                     name: 'potongan'
+                },                {
+                    data: 'jumlah',
+                    name: 'jumlah'
                 },
             ],
         });

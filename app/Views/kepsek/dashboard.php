@@ -20,7 +20,7 @@
     </div>
     <div class="panel-body">
         <p>
-            Selamat datang di Sistem Informasi Manajemen Penggajian Karyawan
+            Selamat datang di Sistem Informasi Manajemen Penggajian Karyawan SD NEGERI SIDOREJO
         </p>
     </div>
 </div>
