@@ -103,7 +103,13 @@ class GajiController extends BaseController
         $Pdfgenerator = new Pdfgenerator();
         // title dari pdf
         $data['title_pdf'] = 'Slip Gaji';
+        $gaji = new \App\Models\GajiModel();
 
+        $data['gaji'] = $gaji->where('id', $id)->findAll();
+
+        foreach ($data['gaji'] as $g) {
+            $data['jumlah'] = $g['gaji_pokok'] + $g['uang_makan'] + $g['uang_tambahan'] - $g['potongan'];
+        }
         // filename dari pdf ketika didownload
         $file_pdf = 'slip_gaji';
         // setting paper

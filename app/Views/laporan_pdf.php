@@ -13,6 +13,7 @@
         #table {
             width: 100%;
         }
+
         #table td,
         #table th {
             padding: 8px;
@@ -33,16 +34,44 @@
             /* background-color: #4CAF50; */
             color: white;
         }
+
+        .container {
+            margin-top: 100px;
+            position: relative;
+            min-height: 100vh;
+            /* Set tinggi minimal 100% dari viewport */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .left-signature,
+        .right-signature {
+            width: 45%;
+            /* Atur lebar sesuai kebutuhan */
+            margin-top: auto;
+        }
+
+        .left-signature {
+            float: left;
+            /* Mengatur posisi tanda tangan kiri di sebelah kiri */
+        }
+
+        .right-signature {
+            float: right;
+            text-align: right;
+            /* Mengatur posisi tanda tangan kanan di sebelah kanan */
+        }
     </style>
 </head>
 
 
 <body>
     <div style="text-align:center">
-        <h3>SLIP GAJI</h3>
+        <h3><?= $title_pdf; ?></h3>
         <p>SD NEGERI SIDOREJO</p>
     </div>
-    <hr/>
+    <hr />
     <table id="table">
         <thead>
             <tr>
@@ -60,9 +89,41 @@
                 <td>Potongan Gaji</td>
                 <td>Jumlah</td>
             </tr>
+            <?php foreach ($gaji as $g) : ?>
+                <tr>
+                    <td scope="row"></td>
+                    <td><?= $g['tanggal_gajian'] ?></td>
+                    <td><?= $g['gaji_pokok'] ?></td>
+                    <td><?= $g['uang_makan'] ?></td>
+                    <td><?= $g['uang_tambahan'] ?></td>
+                    <td><?= $g['potongan'] ?></td>
+                    <td><?= $jumlah ?></td>
+                </tr>
+            <?php endforeach ?>
         </tbody>
     </table>
-    
+
+    <!-- ttd -->
+    <div class="container">
+        <div class="left-signature">
+            <p>Mengetahui,</p>
+            <p>Kepala Sekolah</p>
+            <br>
+            <br>
+            <br>
+            <p>_______________________</p>
+
+        </div>
+        <div class="right-signature">
+            <p>Surabaya, <?= date('d F Y') ?></p>
+            <p>Sekretaris</p>
+            <br>
+            <br>
+            <br>
+            <p>_______________________</p>
+        </div>
+    </div>
+
 </body>
 
 </html>
